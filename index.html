@@ -1,0 +1,2530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMARTFLOW | Intelligent Traffic Control</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   SMARTFLOW - COMPLETE SINGLE FILE WEBSITE
+========================================================= */
+
+:root {
+    --bg: #080d18;
+    --panel: #101827;
+    --panel2: #0d1523;
+    --border: #263349;
+    --text: #f1f5f9;
+    --muted: #7d8ca5;
+
+    --green: #35e59b;
+    --red: #ff5364;
+    --yellow: #ffc857;
+    --blue: #5b9cff;
+    --purple: #c084fc;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+button, input, select {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    background: #0b1220;
+    border-right: 1px solid var(--border);
+    padding: 28px 18px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 20;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 12px;
+    margin-bottom: 55px;
+}
+
+.brand-icon {
+    width: 39px;
+    height: 39px;
+    background: var(--green);
+    color: #07121a;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.brand h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 17px;
+    letter-spacing: 1px;
+}
+
+.brand span {
+    display: block;
+    color: var(--muted);
+    font-size: 7px;
+    letter-spacing: 1.5px;
+    margin-top: 3px;
+}
+
+.section-label {
+    font-size: 10px;
+    color: #52627b;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    padding: 0 12px;
+    margin-bottom: 15px;
+}
+
+.nav-item {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #8190a8;
+    text-align: left;
+    padding: 14px 15px;
+    border-radius: 9px;
+    margin-bottom: 7px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    font-size: 13px;
+    transition: 0.25s;
+}
+
+.nav-item span {
+    font-size: 19px;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    background: #182438;
+    color: var(--green);
+}
+
+.system-card {
+    background: #111d2d;
+    border: 1px solid #203047;
+    border-radius: 12px;
+    padding: 16px;
+    margin: auto 5px 20px;
+}
+
+.system-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--green);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.pulse {
+    width: 7px;
+    height: 7px;
+    background: var(--green);
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 10px var(--green);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%,100% { opacity: 1; }
+    50% { opacity: .35; }
+}
+
+.system-card p {
+    font-size: 11px;
+    color: #667790;
+    line-height: 1.7;
+    margin: 12px 0;
+}
+
+.system-line {
+    height: 1px;
+    background: #24344a;
+    margin-bottom: 10px;
+}
+
+.system-card small {
+    font-size: 9px;
+    color: #4c607c;
+    letter-spacing: 1px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 7px;
+}
+
+.avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #273752;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.profile strong {
+    display: block;
+    font-size: 11px;
+}
+
+.profile small {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+/* ================= MAIN ================= */
+
+.main {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    padding: 36px 42px;
+    max-width: 1800px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32px;
+}
+
+.eyebrow {
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(25px, 3vw, 36px);
+    letter-spacing: -1px;
+}
+
+.subtitle {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.top-actions {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+
+.live-status {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    background: #10251f;
+    border: 1px solid #1c5a44;
+    color: var(--green);
+    padding: 10px 14px;
+    border-radius: 7px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .8px;
+}
+
+.reset-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: #93a1b7;
+    padding: 10px 15px;
+    border-radius: 7px;
+    font-size: 11px;
+}
+
+.reset-btn:hover {
+    border-color: var(--green);
+    color: var(--green);
+}
+
+/* ================= KPI ================= */
+
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.kpi-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 21px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    transition: .3s;
+}
+
+.kpi-card:hover {
+    transform: translateY(-2px);
+    border-color: #3a4c68;
+}
+
+.kpi-icon {
+    width: 43px;
+    height: 43px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.blue { background: #172d50; color: var(--blue); }
+.green { background: #12372d; color: var(--green); }
+.yellow { background: #3c321b; color: var(--yellow); }
+.red { background: #3d2029; color: var(--red); }
+
+.kpi-label {
+    display: block;
+    color: var(--muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.kpi-card h2 {
+    font-size: 22px;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.kpi-card h2 small {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.kpi-card p {
+    color: #586982;
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+/* ================= PANELS ================= */
+
+.panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    overflow: hidden;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 22px 25px;
+    border-bottom: 1px solid #1e2a3d;
+}
+
+.panel-tag {
+    color: var(--green);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 7px;
+}
+
+.panel h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 19px;
+}
+
+.round-badge,
+.ai-badge {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--green);
+    border: 1px solid #245943;
+    background: #102b23;
+    padding: 7px 10px;
+    border-radius: 5px;
+}
+
+.sensor-status {
+    font-size: 9px;
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+/* ================= DASHBOARD ================= */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 22px;
+    margin-bottom: 22px;
+}
+
+/* ================= INTERSECTION ================= */
+
+.intersection-wrapper {
+    height: 390px;
+    position: relative;
+    background: #0c1422;
+    overflow: hidden;
+}
+
+.road {
+    position: absolute;
+    background: #1a2635;
+}
+
+.vertical-road {
+    width: 130px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.horizontal-road {
+    height: 130px;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.road-line {
+    position: absolute;
+    opacity: .55;
+}
+
+.vertical-line {
+    width: 2px;
+    height: 100%;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    background: repeating-linear-gradient(
+        to bottom,
+        #526176 0px,
+        #526176 15px,
+        transparent 15px,
+        transparent 28px
+    );
+}
+
+.horizontal-line {
+    height: 2px;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    background: repeating-linear-gradient(
+        to right,
+        #526176 0px,
+        #526176 15px,
+        transparent 15px,
+        transparent 28px
+    );
+}
+
+/* Lane dividers */
+.intersection-wrapper::before,
+.intersection-wrapper::after {
+    content: "";
+    position: absolute;
+    background: #2c394c;
+    z-index: 2;
+}
+
+.intersection-wrapper::before {
+    width: 1px;
+    height: 100%;
+    left: calc(50% - 65px);
+}
+
+.intersection-wrapper::after {
+    width: 1px;
+    height: 100%;
+    left: calc(50% + 65px);
+}
+
+/* Labels */
+
+.direction-label {
+    position: absolute;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 10px;
+}
+
+.direction-label strong {
+    letter-spacing: 1px;
+    font-size: 11px;
+}
+
+.direction-label span {
+    color: #73839c;
+    font-size: 10px;
+}
+
+.north-label {
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.south-label {
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.east-label {
+    right: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: right;
+}
+
+.west-label {
+    left: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Traffic lights */
+
+.traffic-light {
+    position: absolute;
+    z-index: 6;
+    background: #080c13;
+    border: 2px solid #35445a;
+    border-radius: 8px;
+    width: 25px;
+    padding: 5px 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+}
+
+.bulb {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #252c36;
+    border: 1px solid #404c5d;
+    transition: .3s;
+}
+
+.bulb.red.active {
+    background: var(--red);
+    box-shadow: 0 0 15px var(--red);
+}
+
+.bulb.yellow.active {
+    background: var(--yellow);
+    box-shadow: 0 0 15px var(--yellow);
+}
+
+.bulb.green.active {
+    background: var(--green);
+    box-shadow: 0 0 15px var(--green);
+}
+
+.north-light {
+    top: 65px;
+    left: calc(50% + 75px);
+}
+
+.south-light {
+    bottom: 65px;
+    left: calc(50% - 100px);
+}
+
+.east-light {
+    right: 75px;
+    top: calc(50% + 75px);
+}
+
+.west-light {
+    left: 75px;
+    top: calc(50% - 100px);
+}
+
+/* Center */
+
+.intersection-center {
+    position: absolute;
+    z-index: 5;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.center-ring {
+    width: 58px;
+    height: 58px;
+    border: 2px solid #34465e;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    background: #111b2a;
+}
+
+.center-core {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #1a3441;
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    box-shadow: 0 0 25px #1b7d5a55;
+}
+
+.intersection-center span {
+    display: block;
+    font-size: 7px;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    color: #566981;
+    margin-top: 8px;
+}
+
+/* Vehicles */
+
+.vehicle {
+    position: absolute;
+    z-index: 7;
+    font-size: 17px;
+    transition: .8s ease;
+}
+
+.vehicle-north {
+    top: 110px;
+    left: calc(50% - 25px);
+}
+
+.vehicle-south {
+    bottom: 110px;
+    left: calc(50% + 8px);
+}
+
+.vehicle-east {
+    right: 110px;
+    top: calc(50% - 28px);
+}
+
+.vehicle-west {
+    left: 110px;
+    top: calc(50% + 8px);
+}
+
+.vehicle.moving {
+    animation: vehicleMove 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes vehicleMove {
+    from { transform: translateY(0); }
+    to { transform: translateY(-12px); }
+}
+
+/* Countdown */
+
+.countdown-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    padding: 19px 25px;
+    border-top: 1px solid #1e2a3d;
+}
+
+.countdown-label {
+    display: block;
+    color: #64758e;
+    font-size: 9px;
+    letter-spacing: 1px;
+    margin-bottom: 7px;
+}
+
+.countdown-left h3 {
+    font-size: 15px;
+    color: var(--green);
+}
+
+.countdown-center {
+    display: flex;
+    justify-content: center;
+}
+
+.timer-circle {
+    width: 65px;
+    height: 65px;
+    border: 2px solid #295c4b;
+    background: #10251f;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.timer-circle span {
+    color: var(--green);
+    font-size: 22px;
+    font-family: 'Space Grotesk';
+    font-weight: 700;
+}
+
+.timer-circle small {
+    font-size: 7px;
+    color: #719d8c;
+}
+
+.countdown-right {
+    text-align: right;
+}
+
+.countdown-right strong {
+    color: var(--green);
+    font-size: 12px;
+}
+
+.progress-track {
+    height: 4px;
+    background: #1d2a3c;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--green);
+    transition: width 1s linear;
+}
+
+/* ================= CONTROL PANEL ================= */
+
+.input-description {
+    color: #71819a;
+    font-size: 11px;
+    line-height: 1.7;
+    padding: 20px 25px 13px;
+}
+
+.direction-inputs {
+    padding: 0 25px;
+}
+
+.input-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 0;
+    border-bottom: 1px solid #1e2a3d;
+}
+
+.input-direction {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.direction-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.north-dot { background: var(--blue); box-shadow: 0 0 8px var(--blue); }
+.south-dot { background: var(--green); box-shadow: 0 0 8px var(--green); }
+.east-dot { background: var(--yellow); box-shadow: 0 0 8px var(--yellow); }
+.west-dot { background: var(--purple); box-shadow: 0 0 8px var(--purple); }
+
+.input-direction strong {
+    display: block;
+    font-size: 11px;
+    letter-spacing: .8px;
+}
+
+.input-direction small {
+    display: block;
+    color: #53657d;
+    font-size: 9px;
+    margin-top: 4px;
+}
+
+.number-control {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.number-control button {
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid #2d3c53;
+    background: #172236;
+    color: #91a1b8;
+    font-size: 17px;
+}
+
+.number-control button:hover {
+    color: var(--green);
+    border-color: var(--green);
+}
+
+.number-control input {
+    width: 43px;
+    height: 27px;
+    border: 1px solid #2d3c53;
+    border-radius: 5px;
+    background: #0c1422;
+    color: white;
+    text-align: center;
+    font-weight: 700;
+    font-size: 12px;
+    outline: none;
+}
+
+.number-control input:focus {
+    border-color: var(--green);
+}
+
+/* Emergency */
+
+.emergency-box {
+    margin: 19px 25px;
+    padding: 14px;
+    border: 1px solid #493b2b;
+    border-radius: 8px;
+    background: #211c16;
+}
+
+.emergency-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.emergency-header strong {
+    display: block;
+    font-size: 11px;
+    color: #e5c17d;
+}
+
+.emergency-header small {
+    display: block;
+    font-size: 9px;
+    color: #8c785a;
+    margin-top: 4px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    display: block;
+    width: 35px;
+    height: 19px;
+    background: #394052;
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.slider::before {
+    content: "";
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    left: 3px;
+    top: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: .3s;
+}
+
+.switch input:checked + .slider {
+    background: var(--red);
+}
+
+.switch input:checked + .slider::before {
+    transform: translateX(16px);
+}
+
+.emergency-select {
+    display: none;
+    margin-top: 12px;
+}
+
+.emergency-select.show {
+    display: block;
+}
+
+.emergency-select label {
+    display: block;
+    color: #9d8765;
+    font-size: 9px;
+    margin-bottom: 6px;
+}
+
+.emergency-select select {
+    width: 100%;
+    padding: 9px;
+    background: #15120f;
+    color: #d8b779;
+    border: 1px solid #5a4426;
+    border-radius: 5px;
+    font-size: 11px;
+    outline: none;
+}
+
+/* Button */
+
+.simulate-btn {
+    width: calc(100% - 50px);
+    margin: 0 25px 24px;
+    padding: 15px;
+    border: none;
+    border-radius: 7px;
+    background: var(--green);
+    color: #071b16;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: .25s;
+}
+
+.simulate-btn:hover {
+    background: #55f2ae;
+    box-shadow: 0 0 25px #35e59b33;
+    transform: translateY(-1px);
+}
+
+.simulate-btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+/* ================= ANALYTICS ================= */
+
+.analytics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-bottom: 22px;
+}
+
+.live-dot {
+    color: var(--green);
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.bars-container {
+    padding: 23px 25px;
+}
+
+.bar-item {
+    margin-bottom: 19px;
+}
+
+.bar-item:last-child {
+    margin-bottom: 0;
+}
+
+.bar-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #8493a9;
+    margin-bottom: 8px;
+}
+
+.bar-info strong {
+    color: white;
+}
+
+.bar-track {
+    height: 7px;
+    background: #1d2a3d;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 5px;
+    transition: width .8s ease;
+}
+
+.north-fill { background: var(--blue); }
+.south-fill { background: var(--green); }
+.east-fill { background: var(--yellow); }
+.west-fill { background: var(--purple); }
+
+/* Decision */
+
+.decision-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 25px;
+}
+
+.decision-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    background: #153a2d;
+    color: var(--green);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 21px;
+}
+
+.decision-label {
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: #61728c;
+}
+
+.decision-content h3 {
+    font-size: 14px;
+    margin: 6px 0;
+}
+
+.decision-content p {
+    color: #65758c;
+    font-size: 10px;
+}
+
+.decision-stats {
+    border-top: 1px solid #1e2a3d;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 17px 25px;
+}
+
+.decision-stats span {
+    display: block;
+    color: #586981;
+    font-size: 8px;
+    letter-spacing: .7px;
+    margin-bottom: 7px;
+}
+
+.decision-stats strong {
+    font-size: 12px;
+    color: var(--green);
+}
+
+/* ================= HISTORY ================= */
+
+.history-panel {
+    margin-bottom: 30px;
+}
+
+.clear-history {
+    background: transparent;
+    border: 1px solid #29384e;
+    color: #71819a;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 10px;
+}
+
+.clear-history:hover {
+    color: var(--red);
+    border-color: var(--red);
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 850px;
+}
+
+th {
+    text-align: left;
+    padding: 14px 25px;
+    color: #52627b;
+    font-size: 8px;
+    letter-spacing: 1px;
+    font-weight: 700;
+    background: #0d1625;
+}
+
+td {
+    padding: 15px 25px;
+    border-top: 1px solid #1c293c;
+    color: #a0aec1;
+    font-size: 10px;
+}
+
+td strong {
+    color: white;
+}
+
+.empty-row td {
+    text-align: center;
+    padding: 30px;
+    color: #53647c;
+}
+
+.status-normal { color: var(--green); }
+.status-heavy { color: var(--red); }
+.status-emergency { color: var(--yellow); }
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    color: #35445b;
+    font-size: 8px;
+    letter-spacing: 1px;
+    padding: 0 3px 15px;
+}
+
+/* ================= TOAST ================= */
+
+.toast {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    background: #162437;
+    border: 1px solid #34506e;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 12px;
+    z-index: 100;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: .3s;
+    pointer-events: none;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1250px) {
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .main {
+        margin-left: 220px;
+        width: calc(100% - 220px);
+        padding: 28px;
+    }
+
+    .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 800px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .topbar {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .top-actions {
+        width: 100%;
+    }
+
+    .live-status {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .analytics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .kpi-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .intersection-wrapper {
+        height: 330px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .kpi-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .panel-header {
+        padding: 18px;
+    }
+
+    .direction-inputs,
+    .input-description {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .emergency-box {
+        margin-left: 18px;
+        margin-right: 18px;
+    }
+
+    .simulate-btn {
+        width: calc(100% - 36px);
+        margin-left: 18px;
+        margin-right: 18px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+        <div class="brand-icon">✦</div>
+        <div>
+            <h2>SMARTFLOW</h2>
+            <span>TRAFFIC INTELLIGENCE</span>
+        </div>
+    </div>
+
+    <div>
+        <p class="section-label">CONTROL CENTER</p>
+
+        <button class="nav-item active" onclick="scrollToTop()">
+            <span>▦</span>
+            Live Dashboard
+        </button>
+
+        <button class="nav-item" onclick="scrollToSection('analyticsSection')">
+            <span>◈</span>
+            Traffic Analytics
+        </button>
+
+        <button class="nav-item" onclick="scrollToSection('historySection')">
+            <span>◷</span>
+            Simulation History
+        </button>
+    </div>
+
+    <div class="system-card">
+        <div class="system-top">
+            <span class="pulse"></span>
+            <span>SYSTEM ONLINE</span>
+        </div>
+
+        <p>Adaptive traffic control engine is operational.</p>
+
+        <div class="system-line"></div>
+
+        <small>VERSION 1.0.0</small>
+    </div>
+
+    <div class="profile">
+        <div class="avatar">DG</div>
+        <div>
+            <strong>Traffic Operator</strong>
+            <small>Administrator</small>
+        </div>
+    </div>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+<header class="topbar">
+
+    <div>
+        <p class="eyebrow">INTELLIGENT TRANSPORTATION SYSTEM</p>
+        <h1>Intersection Command Center</h1>
+        <p class="subtitle">
+            Real-time adaptive signal management and traffic intelligence
+        </p>
+    </div>
+
+    <div class="top-actions">
+
+        <div class="live-status">
+            <span class="pulse"></span>
+            LIVE MONITORING
+        </div>
+
+        <button class="reset-btn" onclick="resetSystem()">
+            ↻ Reset
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- ================= KPI ================= -->
+
+<section class="kpi-grid">
+
+    <div class="kpi-card">
+        <div class="kpi-icon blue">▦</div>
+        <div>
+            <span class="kpi-label">TOTAL VEHICLES</span>
+            <h2 id="totalVehicles">0</h2>
+            <p>Across all directions</p>
+        </div>
+    </div>
+
+    <div class="kpi-card">
+        <div class="kpi-icon green">◉</div>
+        <div>
+            <span class="kpi-label">ACTIVE SIGNAL</span>
+            <h2 id="activeSignal">---</h2>
+            <p id="activeSignalSub">Awaiting simulation</p>
+        </div>
+    </div>
+
+    <div class="kpi-card">
+        <div class="kpi-icon yellow">◷</div>
+        <div>
+            <span class="kpi-label">GREEN DURATION</span>
+            <h2><span id="greenDuration">0</span><small> sec</small></h2>
+            <p>Adaptive timing</p>
+        </div>
+    </div>
+
+    <div class="kpi-card">
+        <div class="kpi-icon red">⚠</div>
+        <div>
+            <span class="kpi-label">CONGESTION STATUS</span>
+            <h2 id="congestionStatus">CLEAR</h2>
+            <p id="congestionSub">No critical congestion</p>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- ================= MAIN GRID ================= -->
+
+<section class="dashboard-grid">
+
+
+<!-- INTERSECTION -->
+
+<div class="panel intersection-panel">
+
+    <div class="panel-header">
+        <div>
+            <p class="panel-tag">LIVE INTERSECTION</p>
+            <h2>Signal Visualization</h2>
+        </div>
+
+        <div class="round-badge">
+            ROUND <span id="roundNumber">0</span>
+        </div>
+    </div>
+
+
+    <div class="intersection-wrapper">
+
+        <div class="direction-label north-label">
+            <strong>NORTH</strong>
+            <span id="northVehicles">0 vehicles</span>
+        </div>
+
+        <div class="direction-label south-label">
+            <strong>SOUTH</strong>
+            <span id="southVehicles">0 vehicles</span>
+        </div>
+
+        <div class="direction-label east-label">
+            <strong>EAST</strong>
+            <span id="eastVehicles">0 vehicles</span>
+        </div>
+
+        <div class="direction-label west-label">
+            <strong>WEST</strong>
+            <span id="westVehicles">0 vehicles</span>
+        </div>
+
+
+        <div class="road vertical-road"></div>
+        <div class="road horizontal-road"></div>
+
+        <div class="road-line vertical-line"></div>
+        <div class="road-line horizontal-line"></div>
+
+
+        <!-- SIGNALS -->
+
+        <div class="traffic-light north-light" id="light-north">
+            <div class="bulb red"></div>
+            <div class="bulb yellow"></div>
+            <div class="bulb green"></div>
+        </div>
+
+        <div class="traffic-light south-light" id="light-south">
+            <div class="bulb red"></div>
+            <div class="bulb yellow"></div>
+            <div class="bulb green"></div>
+        </div>
+
+        <div class="traffic-light east-light" id="light-east">
+            <div class="bulb red"></div>
+            <div class="bulb yellow"></div>
+            <div class="bulb green"></div>
+        </div>
+
+        <div class="traffic-light west-light" id="light-west">
+            <div class="bulb red"></div>
+            <div class="bulb yellow"></div>
+            <div class="bulb green"></div>
+        </div>
+
+
+        <!-- CENTER -->
+
+        <div class="intersection-center">
+            <div class="center-ring">
+                <div class="center-core">✦</div>
+            </div>
+            <span>SMART<br>CONTROL</span>
+        </div>
+
+
+        <!-- VEHICLES -->
+
+        <div class="vehicle vehicle-north">🚗</div>
+        <div class="vehicle vehicle-south">🚙</div>
+        <div class="vehicle vehicle-east">🚕</div>
+        <div class="vehicle vehicle-west">🚓</div>
+
+    </div>
+
+
+    <!-- COUNTDOWN -->
+
+    <div class="countdown-container">
+
+        <div class="countdown-left">
+            <span class="countdown-label">CURRENT SIGNAL</span>
+            <h3 id="countdownDirection">SYSTEM READY</h3>
+        </div>
+
+        <div class="countdown-center">
+            <div class="timer-circle">
+                <span id="countdown">--</span>
+                <small>SEC</small>
+            </div>
+        </div>
+
+        <div class="countdown-right">
+            <span class="countdown-label">SIGNAL STATE</span>
+            <strong id="signalState">STANDBY</strong>
+        </div>
+
+    </div>
+
+    <div class="progress-track">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+</div>
+
+
+<!-- CONTROL PANEL -->
+
+<div class="panel control-panel">
+
+    <div class="panel-header">
+        <div>
+            <p class="panel-tag">SIMULATION CONTROL</p>
+            <h2>Traffic Input</h2>
+        </div>
+
+        <span class="sensor-status">
+            <span class="pulse"></span>
+            SENSORS READY
+        </span>
+    </div>
+
+
+    <div class="input-description">
+        Enter detected vehicle counts for each direction.
+        The system automatically determines signal priority.
+    </div>
+
+
+    <div class="direction-inputs">
+
+        <div class="input-row">
+            <div class="input-direction">
+                <span class="direction-dot north-dot"></span>
+                <div>
+                    <strong>NORTH</strong>
+                    <small>Lane N-01</small>
+                </div>
+            </div>
+
+            <div class="number-control">
+                <button onclick="changeValue('north',-1)">−</button>
+                <input type="number" id="north" value="0" min="0" max="99">
+                <button onclick="changeValue('north',1)">+</button>
+            </div>
+        </div>
+
+
+        <div class="input-row">
+            <div class="input-direction">
+                <span class="direction-dot south-dot"></span>
+                <div>
+                    <strong>SOUTH</strong>
+                    <small>Lane S-01</small>
+                </div>
+            </div>
+
+            <div class="number-control">
+                <button onclick="changeValue('south',-1)">−</button>
+                <input type="number" id="south" value="0" min="0" max="99">
+                <button onclick="changeValue('south',1)">+</button>
+            </div>
+        </div>
+
+
+        <div class="input-row">
+            <div class="input-direction">
+                <span class="direction-dot east-dot"></span>
+                <div>
+                    <strong>EAST</strong>
+                    <small>Lane E-01</small>
+                </div>
+            </div>
+
+            <div class="number-control">
+                <button onclick="changeValue('east',-1)">−</button>
+                <input type="number" id="east" value="0" min="0" max="99">
+                <button onclick="changeValue('east',1)">+</button>
+            </div>
+        </div>
+
+
+        <div class="input-row">
+            <div class="input-direction">
+                <span class="direction-dot west-dot"></span>
+                <div>
+                    <strong>WEST</strong>
+                    <small>Lane W-01</small>
+                </div>
+            </div>
+
+            <div class="number-control">
+                <button onclick="changeValue('west',-1)">−</button>
+                <input type="number" id="west" value="0" min="0" max="99">
+                <button onclick="changeValue('west',1)">+</button>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- EMERGENCY -->
+
+    <div class="emergency-box">
+
+        <div class="emergency-header">
+
+            <div>
+                <strong>Emergency Vehicle Priority</strong>
+                <small>Override normal traffic logic</small>
+            </div>
+
+            <label class="switch">
+                <input type="checkbox" id="emergencyToggle" onchange="toggleEmergency()">
+                <span class="slider"></span>
+            </label>
+
+        </div>
+
+        <div class="emergency-select" id="emergencySelect">
+            <label>Emergency direction</label>
+
+            <select id="emergencyDirection">
+                <option value="north">North</option>
+                <option value="south">South</option>
+                <option value="east">East</option>
+                <option value="west">West</option>
+            </select>
+        </div>
+
+    </div>
+
+
+    <button class="simulate-btn" id="simulateBtn" onclick="runSimulation()">
+        <span>▶</span>
+        RUN SMART SIMULATION
+        <span>→</span>
+    </button>
+
+</div>
+
+</section>
+
+
+<!-- ================= ANALYTICS ================= -->
+
+<section class="analytics-grid" id="analyticsSection">
+
+    <div class="panel analytics-panel">
+
+        <div class="panel-header">
+            <div>
+                <p class="panel-tag">TRAFFIC INTELLIGENCE</p>
+                <h2>Density Analysis</h2>
+            </div>
+
+            <span class="live-dot">● LIVE DATA</span>
+        </div>
+
+        <div class="bars-container">
+
+            <div class="bar-item">
+                <div class="bar-info">
+                    <span>NORTH</span>
+                    <strong id="barNorthValue">0</strong>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill north-fill" id="barNorth"></div>
+                </div>
+            </div>
+
+            <div class="bar-item">
+                <div class="bar-info">
+                    <span>SOUTH</span>
+                    <strong id="barSouthValue">0</strong>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill south-fill" id="barSouth"></div>
+                </div>
+            </div>
+
+            <div class="bar-item">
+                <div class="bar-info">
+                    <span>EAST</span>
+                    <strong id="barEastValue">0</strong>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill east-fill" id="barEast"></div>
+                </div>
+            </div>
+
+            <div class="bar-item">
+                <div class="bar-info">
+                    <span>WEST</span>
+                    <strong id="barWestValue">0</strong>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill west-fill" id="barWest"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="panel decision-panel">
+
+        <div class="panel-header">
+            <div>
+                <p class="panel-tag">DECISION ENGINE</p>
+                <h2>System Analysis</h2>
+            </div>
+
+            <span class="ai-badge">AI LOGIC</span>
+        </div>
+
+        <div class="decision-content">
+
+            <div class="decision-icon">✦</div>
+
+            <div>
+                <span class="decision-label">CURRENT DECISION</span>
+                <h3 id="decisionText">Awaiting traffic input...</h3>
+                <p id="decisionReason">
+                    Enter vehicle counts and run the simulation.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="decision-stats">
+
+            <div>
+                <span>TOTAL VEHICLES</span>
+                <strong id="analysisTotal">0</strong>
+            </div>
+
+            <div>
+                <span>PRIORITY LANE</span>
+                <strong id="priorityLane">---</strong>
+            </div>
+
+            <div>
+                <span>CONTROL MODE</span>
+                <strong id="controlMode">ADAPTIVE</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= HISTORY ================= -->
+
+<section class="panel history-panel" id="historySection">
+
+    <div class="panel-header">
+
+        <div>
+            <p class="panel-tag">OPERATION LOG</p>
+            <h2>Simulation History</h2>
+        </div>
+
+        <button class="clear-history" onclick="clearHistory()">
+            Clear History
+        </button>
+
+    </div>
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>ROUND</th>
+                    <th>TIME</th>
+                    <th>NORTH</th>
+                    <th>SOUTH</th>
+                    <th>EAST</th>
+                    <th>WEST</th>
+                    <th>DECISION</th>
+                    <th>DURATION</th>
+                    <th>STATUS</th>
+                </tr>
+            </thead>
+
+            <tbody id="historyBody">
+
+                <tr class="empty-row">
+                    <td colspan="9">
+                        No simulation rounds completed yet.
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<footer>
+    <span>SMARTFLOW INTELLIGENT TRAFFIC CONTROL SYSTEM</span>
+    <span>ADAPTIVE SIGNAL MANAGEMENT • REAL-TIME SIMULATION</span>
+</footer>
+
+</main>
+
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* =========================================================
+   SMARTFLOW JAVASCRIPT ENGINE
+========================================================= */
+
+let roundNumber = 0;
+let countdownInterval = null;
+let isRunning = false;
+
+const directions = ["north", "south", "east", "west"];
+
+const directionNames = {
+    north: "NORTH",
+    south: "SOUTH",
+    east: "EAST",
+    west: "WEST"
+};
+
+
+/* ================= INPUT ================= */
+
+function getVehicleCounts() {
+
+    return {
+        north: Math.max(0, parseInt(document.getElementById("north").value) || 0),
+        south: Math.max(0, parseInt(document.getElementById("south").value) || 0),
+        east: Math.max(0, parseInt(document.getElementById("east").value) || 0),
+        west: Math.max(0, parseInt(document.getElementById("west").value) || 0)
+    };
+
+}
+
+
+function changeValue(direction, amount) {
+
+    const input = document.getElementById(direction);
+
+    let value = parseInt(input.value) || 0;
+
+    value += amount;
+
+    if (value < 0) value = 0;
+    if (value > 99) value = 99;
+
+    input.value = value;
+
+    updatePreview();
+
+}
+
+
+/* ================= SMART TIMER ================= */
+/* Same as original C program */
+
+function calculateGreenTime(vehicleCount) {
+
+    if (vehicleCount === 0) return 5;
+
+    else if (vehicleCount <= 2) return 10;
+
+    else if (vehicleCount <= 5) return 20;
+
+    else if (vehicleCount <= 10) return 30;
+
+    else return 40;
+
+}
+
+
+/* ================= BUSIEST DIRECTION ================= */
+
+function findBusiestDirection(vehicles) {
+
+    let busiest = "north";
+
+    directions.forEach(direction => {
+
+        if (vehicles[direction] > vehicles[busiest]) {
+            busiest = direction;
+        }
+
+    });
+
+    return busiest;
+
+}
+
+
+/* ================= PREVIEW ================= */
+
+function updatePreview() {
+
+    const vehicles = getVehicleCounts();
+
+    document.getElementById("northVehicles").textContent =
+        vehicles.north + " vehicles";
+
+    document.getElementById("southVehicles").textContent =
+        vehicles.south + " vehicles";
+
+    document.getElementById("eastVehicles").textContent =
+        vehicles.east + " vehicles";
+
+    document.getElementById("westVehicles").textContent =
+        vehicles.west + " vehicles";
+
+    const total = Object.values(vehicles).reduce((a,b) => a+b, 0);
+
+    document.getElementById("totalVehicles").textContent = total;
+
+    updateBars(vehicles);
+
+}
+
+
+/* ================= BARS ================= */
+
+function updateBars(vehicles) {
+
+    const maxValue = Math.max(...Object.values(vehicles), 1);
+
+    directions.forEach(direction => {
+
+        const cap = direction.charAt(0).toUpperCase() + direction.slice(1);
+
+        document.getElementById("bar" + cap).style.width =
+            (vehicles[direction] / maxValue * 100) + "%";
+
+        document.getElementById("bar" + cap + "Value").textContent =
+            vehicles[direction];
+
+    });
+
+}
+
+
+/* ================= EMERGENCY ================= */
+
+function toggleEmergency() {
+
+    const toggle = document.getElementById("emergencyToggle");
+
+    const select = document.getElementById("emergencySelect");
+
+    if (toggle.checked) {
+        select.classList.add("show");
+    } else {
+        select.classList.remove("show");
+    }
+
+}
+
+
+/* ================= LIGHT CONTROL ================= */
+
+function resetLights() {
+
+    directions.forEach(direction => {
+
+        const light = document.getElementById("light-" + direction);
+
+        light.querySelector(".red").classList.remove("active");
+        light.querySelector(".yellow").classList.remove("active");
+        light.querySelector(".green").classList.remove("active");
+
+    });
+
+}
+
+
+function setSignal(direction, state) {
+
+    const light = document.getElementById("light-" + direction);
+
+    light.querySelector("." + state).classList.add("active");
+
+}
+
+
+/* ================= SIMULATION ================= */
+
+function runSimulation() {
+
+    if (isRunning) {
+        showToast("A simulation is already running.");
+        return;
+    }
+
+    const vehicles = getVehicleCounts();
+
+    const emergencyEnabled =
+        document.getElementById("emergencyToggle").checked;
+
+    let greenDirection;
+
+    if (emergencyEnabled) {
+
+        greenDirection =
+            document.getElementById("emergencyDirection").value;
+
+    } else {
+
+        greenDirection = findBusiestDirection(vehicles);
+
+    }
+
+    let greenTime =
+        calculateGreenTime(vehicles[greenDirection]);
+
+    if (emergencyEnabled && greenTime < 20) {
+        greenTime = 20;
+    }
+
+    roundNumber++;
+
+    isRunning = true;
+
+    document.getElementById("simulateBtn").disabled = true;
+
+    document.getElementById("roundNumber").textContent = roundNumber;
+
+    document.getElementById("totalVehicles").textContent =
+        Object.values(vehicles).reduce((a,b) => a+b, 0);
+
+    document.getElementById("activeSignal").textContent =
+        directionNames[greenDirection];
+
+    document.getElementById("activeSignalSub").textContent =
+        emergencyEnabled
+        ? "Emergency priority active"
+        : "Highest traffic priority";
+
+    document.getElementById("greenDuration").textContent = greenTime;
+
+    document.getElementById("analysisTotal").textContent =
+        Object.values(vehicles).reduce((a,b) => a+b, 0);
+
+    document.getElementById("priorityLane").textContent =
+        directionNames[greenDirection];
+
+    document.getElementById("controlMode").textContent =
+        emergencyEnabled ? "EMERGENCY" : "ADAPTIVE";
+
+
+    /* CONGESTION */
+
+    const highestTraffic = Math.max(...Object.values(vehicles));
+
+    const congestion = document.getElementById("congestionStatus");
+    const congestionSub = document.getElementById("congestionSub");
+
+    if (highestTraffic > 10) {
+
+        congestion.textContent = "HEAVY";
+        congestion.style.color = "var(--red)";
+        congestionSub.textContent = "Heavy congestion detected";
+
+    }
+
+    else if (highestTraffic >= 6) {
+
+        congestion.textContent = "MODERATE";
+        congestion.style.color = "var(--yellow)";
+        congestionSub.textContent = "Moderate traffic density";
+
+    }
+
+    else {
+
+        congestion.textContent = "CLEAR";
+        congestion.style.color = "var(--green)";
+        congestionSub.textContent = "No critical congestion";
+
+    }
+
+
+    /* DECISION TEXT */
+
+    if (emergencyEnabled) {
+
+        document.getElementById("decisionText").textContent =
+            "Emergency priority → " + directionNames[greenDirection];
+
+        document.getElementById("decisionReason").textContent =
+            "Ambulance detected. Normal traffic logic overridden.";
+
+    } else {
+
+        document.getElementById("decisionText").textContent =
+            "Highest traffic → " + directionNames[greenDirection];
+
+        document.getElementById("decisionReason").textContent =
+            vehicles[greenDirection] +
+            " vehicles detected. Adaptive green time assigned.";
+
+    }
+
+
+    /* SIGNALS */
+
+    resetLights();
+
+    directions.forEach(direction => {
+
+        const light = document.getElementById("light-" + direction);
+
+        if (direction === greenDirection) {
+
+            light.querySelector(".green").classList.add("active");
+
+        } else {
+
+            light.querySelector(".red").classList.add("active");
+
+        }
+
+    });
+
+
+    /* VEHICLE ANIMATION */
+
+    directions.forEach(direction => {
+
+        const vehicle =
+            document.querySelector(".vehicle-" + direction);
+
+        vehicle.classList.remove("moving");
+
+        if (direction === greenDirection) {
+            vehicle.classList.add("moving");
+        }
+
+    });
+
+
+    /* HISTORY */
+
+    addHistory(
+        vehicles,
+        greenDirection,
+        greenTime,
+        emergencyEnabled
+    );
+
+
+    /* COUNTDOWN */
+
+    startCountdown(greenDirection, greenTime);
+
+}
+
+
+/* ================= COUNTDOWN ================= */
+
+function startCountdown(direction, duration) {
+
+    clearInterval(countdownInterval);
+
+    let remaining = duration;
+
+    const countdown = document.getElementById("countdown");
+
+    const directionText =
+        document.getElementById("countdownDirection");
+
+    const state =
+        document.getElementById("signalState");
+
+    const progress =
+        document.getElementById("progressBar");
+
+    directionText.textContent = directionNames[direction];
+
+    state.textContent = "GREEN ACTIVE";
+
+    state.style.color = "var(--green)";
+
+    countdown.textContent = remaining;
+
+    progress.style.width = "100%";
+
+    countdownInterval = setInterval(() => {
+
+        remaining--;
+
+        countdown.textContent = remaining;
+
+        progress.style.width =
+            (remaining / duration * 100) + "%";
+
+        if (remaining <= 0) {
+
+            clearInterval(countdownInterval);
+
+            finishCountdown(direction);
+
+        }
+
+    }, 1000);
+
+}
+
+
+/* ================= FINISH ================= */
+
+function finishCountdown(direction) {
+
+    document.getElementById("countdown").textContent = "0";
+
+    document.getElementById("signalState").textContent =
+        "CYCLE COMPLETE";
+
+    document.getElementById("signalState").style.color =
+        "var(--yellow)";
+
+    document.getElementById("countdownDirection").textContent =
+        "PREPARE TO STOP";
+
+    resetLights();
+
+    document.getElementById("light-" + direction)
+        .querySelector(".yellow")
+        .classList.add("active");
+
+    setTimeout(() => {
+
+        directions.forEach(dir => {
+
+            document.getElementById("light-" + dir)
+                .querySelector(".red")
+                .classList.add("active");
+
+            document.querySelector(".vehicle-" + dir)
+                .classList.remove("moving");
+
+        });
+
+        document.getElementById("signalState").textContent =
+            "STANDBY";
+
+        document.getElementById("countdownDirection").textContent =
+            "SYSTEM READY";
+
+        document.getElementById("countdown").textContent = "--";
+
+        document.getElementById("progressBar").style.width = "0%";
+
+        document.getElementById("simulateBtn").disabled = false;
+
+        isRunning = false;
+
+        showToast("Signal cycle completed successfully.");
+
+    }, 1500);
+
+}
+
+
+/* ================= HISTORY ================= */
+
+function addHistory(vehicles, direction, duration, emergency) {
+
+    const tbody = document.getElementById("historyBody");
+
+    const emptyRow = tbody.querySelector(".empty-row");
+
+    if (emptyRow) emptyRow.remove();
+
+    const highest = Math.max(...Object.values(vehicles));
+
+    let status = "NORMAL";
+    let statusClass = "status-normal";
+
+    if (emergency) {
+
+        status = "EMERGENCY";
+        statusClass = "status-emergency";
+
+    } else if (highest > 10) {
+
+        status = "HEAVY";
+        statusClass = "status-heavy";
+
+    }
+
+    const now = new Date();
+
+    const time = now.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+
+        <td><strong>#${roundNumber}</strong></td>
+        <td>${time}</td>
+        <td>${vehicles.north}</td>
+        <td>${vehicles.south}</td>
+        <td>${vehicles.east}</td>
+        <td>${vehicles.west}</td>
+        <td><strong>${directionNames[direction]}</strong></td>
+        <td>${duration}s</td>
+        <td class="${statusClass}">${status}</td>
+
+    `;
+
+    tbody.prepend(row);
+
+}
+
+
+/* ================= CLEAR HISTORY ================= */
+
+function clearHistory() {
+
+    document.getElementById("historyBody").innerHTML = `
+
+        <tr class="empty-row">
+            <td colspan="9">
+                No simulation rounds completed yet.
+            </td>
+        </tr>
+
+    `;
+
+    showToast("Simulation history cleared.");
+
+}
+
+
+/* ================= RESET ================= */
+
+function resetSystem() {
+
+    clearInterval(countdownInterval);
+
+    isRunning = false;
+
+    roundNumber = 0;
+
+    directions.forEach(direction => {
+
+        document.getElementById(direction).value = 0;
+
+    });
+
+    document.getElementById("emergencyToggle").checked = false;
+
+    document.getElementById("emergencySelect").classList.remove("show");
+
+    document.getElementById("activeSignal").textContent = "---";
+
+    document.getElementById("activeSignalSub").textContent =
+        "Awaiting simulation";
+
+    document.getElementById("greenDuration").textContent = "0";
+
+    document.getElementById("congestionStatus").textContent = "CLEAR";
+
+    document.getElementById("congestionStatus").style.color =
+        "var(--green)";
+
+    document.getElementById("congestionSub").textContent =
+        "No critical congestion";
+
+    document.getElementById("decisionText").textContent =
+        "Awaiting traffic input...";
+
+    document.getElementById("decisionReason").textContent =
+        "Enter vehicle counts and run the simulation.";
+
+    document.getElementById("roundNumber").textContent = "0";
+
+    document.getElementById("countdown").textContent = "--";
+
+    document.getElementById("countdownDirection").textContent =
+        "SYSTEM READY";
+
+    document.getElementById("signalState").textContent =
+        "STANDBY";
+
+    document.getElementById("progressBar").style.width = "0%";
+
+    document.getElementById("simulateBtn").disabled = false;
+
+    resetLights();
+
+    directions.forEach(direction => {
+
+        document.querySelector(".vehicle-" + direction)
+            .classList.remove("moving");
+
+    });
+
+    document.getElementById("historyBody").innerHTML = `
+
+        <tr class="empty-row">
+            <td colspan="9">
+                No simulation rounds completed yet.
+            </td>
+        </tr>
+
+    `;
+
+    updatePreview();
+
+    showToast("System reset successfully.");
+
+}
+
+
+/* ================= TOAST ================= */
+
+function showToast(message) {
+
+    const toast = document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2500);
+
+}
+
+
+/* ================= NAVIGATION ================= */
+
+function scrollToSection(id) {
+
+    document.getElementById(id).scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+function scrollToTop() {
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+/* ================= INPUT LISTENERS ================= */
+
+directions.forEach(direction => {
+
+    document.getElementById(direction)
+        .addEventListener("input", updatePreview);
+
+});
+
+
+/* ================= INITIALIZE ================= */
+
+updatePreview();
+
+resetLights();
+
+</script>
+
+</body>
+</html>
